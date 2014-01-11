@@ -25,8 +25,6 @@ namespace Dota2BuyMonitor
         
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            groupBoxOptions.Enabled = false;
-
             //init timer
             timer1.Enabled = true;
             timer1.Interval = Convert.ToInt16(numericUpDown1.Value);
@@ -41,6 +39,8 @@ namespace Dota2BuyMonitor
 
             //start the backgroundworkers
             backgroundWorker1.RunWorkerAsync();
+
+            groupBoxOptions.Enabled = false;
 
         }
 
@@ -92,7 +92,7 @@ namespace Dota2BuyMonitor
                     }
                     
 
-                    //exclude unwanted items
+                    //exclude treasure key..
                     if (itemname != "Treasure Key")
                     {
                         //add raw itemslist to list element
@@ -133,7 +133,7 @@ namespace Dota2BuyMonitor
             string gold;
             double currency = 1.0;
             double quote;
-            double quote_wanted = 5.0;
+            double quote_wanted = 0.5;
 
             richTextBox1.Clear();
 
@@ -143,7 +143,7 @@ namespace Dota2BuyMonitor
                 string[] itemdata = itemstring.Split('|');
 
                 //no common & uncommon
-                if (!itemdata[2].Equals("common") && !itemdata[2].StartsWith("u"))
+                if (!itemdata[2].Equals("common"))
                 {
                     document = web.Load("http://www.dota2wh.com" + itemdata[1]);
                     try
@@ -225,6 +225,7 @@ namespace Dota2BuyMonitor
                 items_old = items_new.ToList();
             }
             firstTime = false;
+
             groupBoxOptions.Enabled = true;
         }
 
