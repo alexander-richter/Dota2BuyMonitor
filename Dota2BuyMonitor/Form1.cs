@@ -33,6 +33,7 @@ namespace Dota2BuyMonitor
         double quote_wanted;
         int gold_threshold;
         string itemlink;
+        string allow_uncommons;
 
         //flashing Taskbar
         [DllImport("user32.dll")]
@@ -58,6 +59,17 @@ namespace Dota2BuyMonitor
             buttonStart.Enabled = false;
             buttonStop.Enabled = true;
             groupBoxOptions.Enabled = false;
+
+            //user option uncommons
+            if (checkBoxUncommons.Checked == false)
+            {
+                allow_uncommons = "common";
+            }
+            else
+            {
+                allow_uncommons = "YES";
+            }
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -90,7 +102,7 @@ namespace Dota2BuyMonitor
             HtmlWeb web = new HtmlWeb();
 
             new WebClient();
-            HtmlAgilityPack.HtmlDocument document = web.Load("http://www.dota2wh.com/dota/hero/Jugger");//using a custom url so that it needs only to load minimal things
+            HtmlAgilityPack.HtmlDocument document = web.Load("http://www.dota2wh.com/dota/hero/Vengeful%20Spirit");//using a custom url so that it needs only to load minimal things
             try
             {
                 //get all recent items from WH webpage
@@ -164,11 +176,17 @@ namespace Dota2BuyMonitor
 
             foreach (string itemstring in items_final)
             {
+                if (backgroundWorker1.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+
                 //break up single itemstrings to array
                 string[] itemdata = itemstring.Split('|');
 
                 //no common & uncommon
-                if (!itemdata[2].Contains("common"))
+                if (!itemdata[2].Contains(allow_uncommons))
                 {
                     document = web.Load("http://www.dota2wh.com" + itemdata[1]);
                     try
@@ -221,9 +239,9 @@ namespace Dota2BuyMonitor
                                                 itemlink = "http://www.dota2wh.com" + itemdata[1];
                                                 string iteminfo = string.Concat(new object[] { string.Format("{0:f2}", price), "€  (", string.Format("{0:f2}", quote), ")"});
 
-                                                richTextBox1.AppendText(itemdata[0].Replace("&#39;", "'") + "\r\n");//itemname
-                                                richTextBox1.Text += iteminfo + "\r\n";//item info. Price..Quote..
-                                                richTextBox1.Text += itemlink + "\r\n\r\n";//itemlink to wh
+                                                richTextBox1.AppendText(itemdata[0].Replace("&#39;", "'") + " [" + itemdata[2] + "]\r\n");//itemname
+                                                richTextBox1.AppendText(iteminfo + "\r\n");//item info. Price..Quote..
+                                                richTextBox1.AppendText(itemlink + "\r\n\r\n");//itemlink to wh
 
                                                 //user options
                                                 if (checkBoxNotify.Checked == true)

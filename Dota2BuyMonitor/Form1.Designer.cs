@@ -34,6 +34,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
+            this.checkBoxUncommons = new System.Windows.Forms.CheckBox();
             this.numericUpDownGold = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.numericUpDownQuote = new System.Windows.Forms.NumericUpDown();
@@ -74,18 +75,18 @@
             this.exitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(68, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(93, 26);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // groupBoxOptions
             // 
+            this.groupBoxOptions.Controls.Add(this.checkBoxUncommons);
             this.groupBoxOptions.Controls.Add(this.numericUpDownGold);
             this.groupBoxOptions.Controls.Add(this.label3);
             this.groupBoxOptions.Controls.Add(this.numericUpDownQuote);
@@ -96,10 +97,20 @@
             this.groupBoxOptions.Controls.Add(this.numericUpDownTimer);
             this.groupBoxOptions.Location = new System.Drawing.Point(12, 12);
             this.groupBoxOptions.Name = "groupBoxOptions";
-            this.groupBoxOptions.Size = new System.Drawing.Size(286, 94);
+            this.groupBoxOptions.Size = new System.Drawing.Size(309, 98);
             this.groupBoxOptions.TabIndex = 0;
             this.groupBoxOptions.TabStop = false;
             this.groupBoxOptions.Text = "Options";
+            // 
+            // checkBoxUncommons
+            // 
+            this.checkBoxUncommons.AutoSize = true;
+            this.checkBoxUncommons.Location = new System.Drawing.Point(8, 71);
+            this.checkBoxUncommons.Name = "checkBoxUncommons";
+            this.checkBoxUncommons.Size = new System.Drawing.Size(119, 17);
+            this.checkBoxUncommons.TabIndex = 9;
+            this.checkBoxUncommons.Text = "Allow un-/commons";
+            this.checkBoxUncommons.UseVisualStyleBackColor = true;
             // 
             // numericUpDownGold
             // 
@@ -108,7 +119,7 @@
             0,
             0,
             0});
-            this.numericUpDownGold.Location = new System.Drawing.Point(216, 69);
+            this.numericUpDownGold.Location = new System.Drawing.Point(234, 69);
             this.numericUpDownGold.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -127,7 +138,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(132, 72);
+            this.label3.Location = new System.Drawing.Point(148, 72);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(79, 13);
             this.label3.TabIndex = 7;
@@ -141,7 +152,7 @@
             0,
             0,
             131072});
-            this.numericUpDownQuote.Location = new System.Drawing.Point(238, 44);
+            this.numericUpDownQuote.Location = new System.Drawing.Point(256, 44);
             this.numericUpDownQuote.Maximum = new decimal(new int[] {
             10,
             0,
@@ -155,6 +166,7 @@
             this.numericUpDownQuote.Name = "numericUpDownQuote";
             this.numericUpDownQuote.Size = new System.Drawing.Size(42, 20);
             this.numericUpDownQuote.TabIndex = 5;
+            this.numericUpDownQuote.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numericUpDownQuote.Value = new decimal(new int[] {
             65,
             0,
@@ -164,7 +176,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(131, 47);
+            this.label2.Location = new System.Drawing.Point(147, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(86, 13);
             this.label2.TabIndex = 4;
@@ -175,7 +187,7 @@
             this.checkBoxNotify.AutoSize = true;
             this.checkBoxNotify.Checked = true;
             this.checkBoxNotify.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxNotify.Location = new System.Drawing.Point(7, 21);
+            this.checkBoxNotify.Location = new System.Drawing.Point(8, 21);
             this.checkBoxNotify.Name = "checkBoxNotify";
             this.checkBoxNotify.Size = new System.Drawing.Size(79, 17);
             this.checkBoxNotify.TabIndex = 3;
@@ -185,7 +197,7 @@
             // checkBoxBrowser
             // 
             this.checkBoxBrowser.AutoSize = true;
-            this.checkBoxBrowser.Location = new System.Drawing.Point(7, 46);
+            this.checkBoxBrowser.Location = new System.Drawing.Point(8, 46);
             this.checkBoxBrowser.Name = "checkBoxBrowser";
             this.checkBoxBrowser.Size = new System.Drawing.Size(118, 17);
             this.checkBoxBrowser.TabIndex = 2;
@@ -196,7 +208,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(131, 22);
+            this.label1.Location = new System.Drawing.Point(147, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 13);
             this.label1.TabIndex = 1;
@@ -204,7 +216,7 @@
             // 
             // numericUpDownTimer
             // 
-            this.numericUpDownTimer.Location = new System.Drawing.Point(238, 19);
+            this.numericUpDownTimer.Location = new System.Drawing.Point(256, 19);
             this.numericUpDownTimer.Maximum = new decimal(new int[] {
             20,
             0,
@@ -218,6 +230,7 @@
             this.numericUpDownTimer.Name = "numericUpDownTimer";
             this.numericUpDownTimer.Size = new System.Drawing.Size(42, 20);
             this.numericUpDownTimer.TabIndex = 0;
+            this.numericUpDownTimer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numericUpDownTimer.Value = new decimal(new int[] {
             3,
             0,
@@ -226,10 +239,11 @@
             // 
             // groupBoxItems
             // 
+            this.groupBoxItems.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBoxItems.Controls.Add(this.richTextBox1);
-            this.groupBoxItems.Location = new System.Drawing.Point(12, 141);
+            this.groupBoxItems.Location = new System.Drawing.Point(12, 146);
             this.groupBoxItems.Name = "groupBoxItems";
-            this.groupBoxItems.Size = new System.Drawing.Size(286, 235);
+            this.groupBoxItems.Size = new System.Drawing.Size(309, 275);
             this.groupBoxItems.TabIndex = 1;
             this.groupBoxItems.TabStop = false;
             this.groupBoxItems.Text = "Items";
@@ -237,10 +251,11 @@
             // richTextBox1
             // 
             this.richTextBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.richTextBox1.Location = new System.Drawing.Point(7, 19);
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(3, 16);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(273, 210);
+            this.richTextBox1.Size = new System.Drawing.Size(303, 256);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             this.richTextBox1.WordWrap = false;
@@ -252,11 +267,12 @@
             // 
             // backgroundWorker1
             // 
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(12, 112);
+            this.buttonStart.Location = new System.Drawing.Point(12, 117);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(75, 23);
             this.buttonStart.TabIndex = 2;
@@ -267,7 +283,7 @@
             // buttonStop
             // 
             this.buttonStop.Enabled = false;
-            this.buttonStop.Location = new System.Drawing.Point(93, 112);
+            this.buttonStop.Location = new System.Drawing.Point(93, 117);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStop.TabIndex = 4;
@@ -279,10 +295,10 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 381);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 424);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.statusStrip1.Size = new System.Drawing.Size(310, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(333, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 5;
             // 
@@ -295,7 +311,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(310, 403);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(333, 446);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonStart);
@@ -341,6 +358,7 @@
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.CheckBox checkBoxUncommons;
     }
 }
 
