@@ -12,8 +12,11 @@ using HtmlAgilityPack;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 
+using System.Runtime.InteropServices;
+
 namespace Dota2BuyMonitor
 {
+
     public partial class Form1 : Form
     {
         public Form1()
@@ -26,9 +29,14 @@ namespace Dota2BuyMonitor
             notifyIcon1.BalloonTipClicked += new EventHandler(notifyIcon1_BalloonTipClicked);
         }
 
+        //global vars
         double quote_wanted;
         int gold_threshold;
         string itemlink;
+
+        //flashing Taskbar
+        [DllImport("user32.dll")]
+        static extern bool FlashWindow(IntPtr hwnd, bool bInvert);
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
@@ -113,7 +121,7 @@ namespace Dota2BuyMonitor
                     
 
                     //exclude treasure key..
-                    if (itemname != "Treasure Key")
+                    if (itemname != "Treasure Key" )
                     {
                         //add raw itemslist to list element
                         if (firstTime)
@@ -222,6 +230,10 @@ namespace Dota2BuyMonitor
                                                 {
                                                     notifyIcon1.BalloonTipText = itemdata[0].Replace("&#39;", "'") + " " + iteminfo;
                                                     notifyIcon1.ShowBalloonTip(3000);
+                                                    System.Media.SystemSounds.Asterisk.Play();//play notify sound
+                                                    //flash Taskbar
+                                                    IntPtr handle = this.Handle;
+                                                    FlashWindow(handle, false);
                                                 }
                                                 if (checkBoxBrowser.Checked == true)
                                                 {
