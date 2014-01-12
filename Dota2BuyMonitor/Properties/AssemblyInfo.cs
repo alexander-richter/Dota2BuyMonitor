@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die mit einer Assembly verknüpft sind.
 [assembly: AssemblyTitle("Dota2BuyMonitor")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Monitor Dota 2 Warehouse Items")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Broilercoding")]
 [assembly: AssemblyProduct("Dota2BuyMonitor")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
