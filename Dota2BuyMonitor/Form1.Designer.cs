@@ -31,32 +31,69 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
+            this.numericUpDownGold = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.numericUpDownQuote = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.checkBoxNotify = new System.Windows.Forms.CheckBox();
+            this.checkBoxBrowser = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownTimer = new System.Windows.Forms.NumericUpDown();
             this.groupBoxItems = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.buttonStart = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.buttonStop = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.contextMenuStrip1.SuspendLayout();
             this.groupBoxOptions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownGold)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuote)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimer)).BeginInit();
             this.groupBoxItems.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIcon1
             // 
-            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.notifyIcon1.BalloonTipTitle = "New Items to buy";
+            this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "Dota 2 Buy Monitor";
             this.notifyIcon1.Visible = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.contextMenuStrip1.ShowImageMargin = false;
+            this.contextMenuStrip1.Size = new System.Drawing.Size(68, 26);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // groupBoxOptions
             // 
-            this.groupBoxOptions.Controls.Add(this.checkBox2);
-            this.groupBoxOptions.Controls.Add(this.checkBox1);
+            this.groupBoxOptions.Controls.Add(this.numericUpDownGold);
+            this.groupBoxOptions.Controls.Add(this.label3);
+            this.groupBoxOptions.Controls.Add(this.numericUpDownQuote);
+            this.groupBoxOptions.Controls.Add(this.label2);
+            this.groupBoxOptions.Controls.Add(this.checkBoxNotify);
+            this.groupBoxOptions.Controls.Add(this.checkBoxBrowser);
             this.groupBoxOptions.Controls.Add(this.label1);
-            this.groupBoxOptions.Controls.Add(this.numericUpDown1);
+            this.groupBoxOptions.Controls.Add(this.numericUpDownTimer);
             this.groupBoxOptions.Location = new System.Drawing.Point(12, 12);
             this.groupBoxOptions.Name = "groupBoxOptions";
             this.groupBoxOptions.Size = new System.Drawing.Size(286, 94);
@@ -64,34 +101,125 @@
             this.groupBoxOptions.TabStop = false;
             this.groupBoxOptions.Text = "Options";
             // 
-            // label1
+            // numericUpDownGold
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Check Interval";
+            this.numericUpDownGold.Increment = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.numericUpDownGold.Location = new System.Drawing.Point(216, 69);
+            this.numericUpDownGold.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDownGold.Name = "numericUpDownGold";
+            this.numericUpDownGold.Size = new System.Drawing.Size(64, 20);
+            this.numericUpDownGold.TabIndex = 8;
+            this.numericUpDownGold.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDownGold.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
             // 
-            // numericUpDown1
+            // label3
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(95, 21);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(132, 72);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(79, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Gold Threshold";
+            // 
+            // numericUpDownQuote
+            // 
+            this.numericUpDownQuote.DecimalPlaces = 2;
+            this.numericUpDownQuote.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.numericUpDownQuote.Location = new System.Drawing.Point(238, 44);
+            this.numericUpDownQuote.Maximum = new decimal(new int[] {
             10,
             0,
             0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
+            65536});
+            this.numericUpDownQuote.Minimum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            65536});
+            this.numericUpDownQuote.Name = "numericUpDownQuote";
+            this.numericUpDownQuote.Size = new System.Drawing.Size(42, 20);
+            this.numericUpDownQuote.TabIndex = 5;
+            this.numericUpDownQuote.Value = new decimal(new int[] {
+            65,
+            0,
+            0,
+            131072});
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(131, 47);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(86, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Quote Threshold";
+            // 
+            // checkBoxNotify
+            // 
+            this.checkBoxNotify.AutoSize = true;
+            this.checkBoxNotify.Checked = true;
+            this.checkBoxNotify.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxNotify.Location = new System.Drawing.Point(7, 21);
+            this.checkBoxNotify.Name = "checkBoxNotify";
+            this.checkBoxNotify.Size = new System.Drawing.Size(79, 17);
+            this.checkBoxNotify.TabIndex = 3;
+            this.checkBoxNotify.Text = "Notification";
+            this.checkBoxNotify.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxBrowser
+            // 
+            this.checkBoxBrowser.AutoSize = true;
+            this.checkBoxBrowser.Location = new System.Drawing.Point(7, 46);
+            this.checkBoxBrowser.Name = "checkBoxBrowser";
+            this.checkBoxBrowser.Size = new System.Drawing.Size(118, 17);
+            this.checkBoxBrowser.TabIndex = 2;
+            this.checkBoxBrowser.Text = "Auto Open Browser";
+            this.checkBoxBrowser.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(131, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Check Interval (sek)";
+            // 
+            // numericUpDownTimer
+            // 
+            this.numericUpDownTimer.Location = new System.Drawing.Point(238, 19);
+            this.numericUpDownTimer.Maximum = new decimal(new int[] {
+            20,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(34, 20);
-            this.numericUpDown1.TabIndex = 0;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
+            this.numericUpDownTimer.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDownTimer.Name = "numericUpDownTimer";
+            this.numericUpDownTimer.Size = new System.Drawing.Size(42, 20);
+            this.numericUpDownTimer.TabIndex = 0;
+            this.numericUpDownTimer.Value = new decimal(new int[] {
+            3,
             0,
             0,
             0});
@@ -136,31 +264,40 @@
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
-            // checkBox1
+            // buttonStop
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(150, 21);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.buttonStop.Enabled = false;
+            this.buttonStop.Location = new System.Drawing.Point(93, 112);
+            this.buttonStop.Name = "buttonStop";
+            this.buttonStop.Size = new System.Drawing.Size(75, 23);
+            this.buttonStop.TabIndex = 4;
+            this.buttonStop.Text = "Stop";
+            this.buttonStop.UseVisualStyleBackColor = true;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
-            // checkBox2
+            // statusStrip1
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(9, 49);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(80, 17);
-            this.checkBox2.TabIndex = 3;
-            this.checkBox2.Text = "checkBox2";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 381);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.statusStrip1.Size = new System.Drawing.Size(310, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 5;
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(310, 388);
+            this.ClientSize = new System.Drawing.Size(310, 403);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.groupBoxItems);
             this.Controls.Add(this.groupBoxOptions);
@@ -168,11 +305,17 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Dota 2 Buy Monitor";
+            this.contextMenuStrip1.ResumeLayout(false);
             this.groupBoxOptions.ResumeLayout(false);
             this.groupBoxOptions.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownGold)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuote)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimer)).EndInit();
             this.groupBoxItems.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -181,14 +324,23 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.GroupBox groupBoxOptions;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDownTimer;
         private System.Windows.Forms.GroupBox groupBoxItems;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Timer timer1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button buttonStart;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBoxNotify;
+        private System.Windows.Forms.CheckBox checkBoxBrowser;
+        private System.Windows.Forms.NumericUpDown numericUpDownQuote;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown numericUpDownGold;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.Button buttonStop;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 

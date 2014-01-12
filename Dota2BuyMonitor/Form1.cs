@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Net;
 using HtmlAgilityPack;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Dota2BuyMonitor
 {
@@ -21,15 +22,34 @@ namespace Dota2BuyMonitor
 
             //add eventlisteners for backgroundworkers at the very beginning
             backgroundWorker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker1_RunWorkerCompleted);
+            richTextBox1.LinkClicked += new LinkClickedEventHandler(richTextBox1_LinkClicked);
+            notifyIcon1.BalloonTipClicked += new EventHandler(notifyIcon1_BalloonTipClicked);
         }
-        
+
+        double quote_wanted;
+        int gold_threshold;
+        string itemlink;
+
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            //status strip info
+            toolStripStatusLabel1.Text = "Monitoring Started";
+
             //init timer
             timer1.Enabled = true;
-            timer1.Interval = Convert.ToInt16(numericUpDown1.Value);
+
+            //get all vars from options
+            timer1.Interval = Convert.ToInt16(numericUpDownTimer.Value) * 1000;
+            quote_wanted = Convert.ToDouble(numericUpDownQuote.Value);
+            gold_threshold = Convert.ToInt16(numericUpDownGold.Value);
+
+            //timer start
             timer1.Start();
 
+            //enable..disable things
+            buttonStart.Enabled = false;
+            buttonStop.Enabled = true;
+            groupBoxOptions.Enabled = false;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -39,9 +59,6 @@ namespace Dota2BuyMonitor
 
             //start the backgroundworkers
             backgroundWorker1.RunWorkerAsync();
-
-            groupBoxOptions.Enabled = false;
-
         }
 
         //declare needed vars
@@ -55,6 +72,9 @@ namespace Dota2BuyMonitor
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            //status strip info
+            toolStripStatusLabel1.Text = "Loading new Items...";
+
             //items list so that it only contains the new items
             items_new.Clear();
 
@@ -133,9 +153,6 @@ namespace Dota2BuyMonitor
             string gold;
             double currency = 1.0;
             double quote;
-            double quote_wanted = 0.5;
-
-            richTextBox1.Clear();
 
             foreach (string itemstring in items_final)
             {
@@ -143,7 +160,7 @@ namespace Dota2BuyMonitor
                 string[] itemdata = itemstring.Split('|');
 
                 //no common & uncommon
-                if (!itemdata[2].Equals("common"))
+                if (!itemdata[2].Contains("common"))
                 {
                     document = web.Load("http://www.dota2wh.com" + itemdata[1]);
                     try
@@ -154,54 +171,70 @@ namespace Dota2BuyMonitor
                             {
                                 //get gold amount calculating the buy quote
                                 gold = Regex.Match(node.InnerText, @"\d+").Value;
-                                //MessageBox.Show(gold);
 
-                                //look up dota market place...
-                                document = web.Load("http://steamcommunity.com/market/listings/570/" + itemdata[0].Replace("&#39;", "%27"));
-                                try
+                                //look up dota market place...only if gold amount big enough
+                                if (Convert.ToInt16(gold) >= gold_threshold)
                                 {
-                                    //get the €_€
-                                    node = document.DocumentNode.SelectSingleNode("//span[@class='market_listing_price market_listing_price_with_fee']");
-                                    if (node != null)
+                                    document = web.Load("http://steamcommunity.com/market/listings/570/" + itemdata[0].Replace("&#39;", "%27"));
+                                    try
                                     {
-                                        //all currencies...
-                                        if (node.InnerText.Contains("USD"))
+                                        //get the €_€
+                                        node = document.DocumentNode.SelectSingleNode("//span[@class='market_listing_price market_listing_price_with_fee']");
+                                        if (node != null)
                                         {
-                                            currency = 0.0074;
-                                        }
-                                        else if (node.InnerText.Contains("p&#1091;&#1073;."))
-                                        {
-                                            currency = 0.0223;
-                                        }
-                                        else if (node.InnerText.Contains("&#163;"))
-                                        {
-                                            currency = 0.01215;
-                                        }
-                                        else if (node.InnerText.Contains("&#82;"))
-                                        {
-                                            currency = 0.31;
-                                        }
-                                        else
-                                        {
-                                            currency = 1.0;
-                                        }
-                                        //price to €€
-                                        double price = Convert.ToDouble(node.InnerText.Replace(" ", "").Replace("p&#1091;&#1073;.", "").Replace("&#36;", "").Replace("USD", "").Replace("&#8364;", "").Replace("&#163;", "").Replace("&#82;", "").Replace("-", "0").Trim()) * currency;
-                                        //calc the buyóut quote
-                                        quote = (price / ((double)Convert.ToInt32(gold))) * 1000.0;
-                                        if (quote > quote_wanted)
-                                        {
-                                            richTextBox1.Text += itemdata[0].Replace("&#39;", "%27") + "\r\n";//itemname
-                                            richTextBox1.Text += string.Concat(new object[] {string.Format("{0:f2}", price), "€  (", string.Format("{0:f2}", quote), ")\r\n"});//item info. Price..Quote..
-                                            richTextBox1.Text += "http://www.dota2wh.com" + itemdata[1] + "\r\n\r\n";//itemlink to wh
+                                            //all currencies...
+                                            if (node.InnerText.Contains("USD"))
+                                            {
+                                                currency = 0.0074;
+                                            }
+                                            else if (node.InnerText.Contains("p&#1091;&#1073;."))
+                                            {
+                                                currency = 0.0223;
+                                            }
+                                            else if (node.InnerText.Contains("&#163;"))
+                                            {
+                                                currency = 0.01215;
+                                            }
+                                            else if (node.InnerText.Contains("&#82;"))
+                                            {
+                                                currency = 0.31;
+                                            }
+                                            else
+                                            {
+                                                currency = 1.0;
+                                            }
+                                            //price to €€
+                                            double price = Convert.ToDouble(node.InnerText.Replace(" ", "").Replace("p&#1091;&#1073;.", "").Replace("&#36;", "").Replace("USD", "").Replace("&#8364;", "").Replace("&#163;", "").Replace("&#82;", "").Replace("-", "0").Trim()) * currency;
+                                            //calc the buyóut quote
+                                            quote = (price / (Convert.ToInt32(gold))) * 1000.0;
+                                            if (quote > quote_wanted)
+                                            {
+                                                //data to text
+                                                itemlink = "http://www.dota2wh.com" + itemdata[1];
+                                                string iteminfo = string.Concat(new object[] { string.Format("{0:f2}", price), "€  (", string.Format("{0:f2}", quote), ")"});
+
+                                                richTextBox1.AppendText(itemdata[0].Replace("&#39;", "'") + "\r\n");//itemname
+                                                richTextBox1.Text += iteminfo + "\r\n";//item info. Price..Quote..
+                                                richTextBox1.Text += itemlink + "\r\n\r\n";//itemlink to wh
+
+                                                //user options
+                                                if (checkBoxNotify.Checked == true)
+                                                {
+                                                    notifyIcon1.BalloonTipText = itemdata[0].Replace("&#39;", "'") + " " + iteminfo;
+                                                    notifyIcon1.ShowBalloonTip(3000);
+                                                }
+                                                if (checkBoxBrowser.Checked == true)
+                                                {
+                                                    Process.Start(itemlink);
+                                                }
+                                            }
                                         }
                                     }
+                                    catch
+                                    {
+                                        richTextBox1.Text += "Error Market";
+                                    }
                                 }
-                                catch
-                                {
-                                    richTextBox1.Text += "Error Market";
-                                }
-
                             }
                         }
                     }
@@ -213,21 +246,62 @@ namespace Dota2BuyMonitor
             }
         }
 
+        //search completed, start timer again
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            foreach (string item_output in items_final)
-            {
-                //richTextBox1.Text += item_output + "\r\n";
-            }
+            //status strip info
+            toolStripStatusLabel1.Text = "Refreshing";
 
+            timer1.Start();
+
+            //add already checked items to exclude for new test
             if (!firstTime)
             {
                 items_old = items_new.ToList();
             }
             firstTime = false;
-
-            groupBoxOptions.Enabled = true;
         }
+
+        private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            //open browser with link rtf field
+            Process.Start(e.LinkText);
+        }
+
+        void notifyIcon1_BalloonTipClicked(object sender, EventArgs e)
+        {
+            //open browser with link
+            Process.Start(itemlink);
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            //status strip info
+            toolStripStatusLabel1.Text = "Monitoring Stopped";
+
+            //disable timer
+            timer1.Enabled = false;
+
+            //timer stop
+            timer1.Stop();
+
+            //enable..disable
+            buttonStart.Enabled = true;
+            buttonStop.Enabled = false;
+            groupBoxOptions.Enabled = true;
+
+            //refresh vars
+            firstTime = true;
+            items_old.Clear();
+            items_new.Clear();
+            items_final.Clear();
+        }
+
 
     }
 }
