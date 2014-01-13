@@ -51,6 +51,7 @@
             this.buttonStop = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.checkBoxIgnoreHeroic = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBoxOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownGold)).BeginInit();
@@ -86,6 +87,7 @@
             // 
             // groupBoxOptions
             // 
+            this.groupBoxOptions.Controls.Add(this.checkBoxIgnoreHeroic);
             this.groupBoxOptions.Controls.Add(this.checkBoxUncommons);
             this.groupBoxOptions.Controls.Add(this.numericUpDownGold);
             this.groupBoxOptions.Controls.Add(this.label3);
@@ -97,7 +99,7 @@
             this.groupBoxOptions.Controls.Add(this.numericUpDownTimer);
             this.groupBoxOptions.Location = new System.Drawing.Point(12, 12);
             this.groupBoxOptions.Name = "groupBoxOptions";
-            this.groupBoxOptions.Size = new System.Drawing.Size(309, 98);
+            this.groupBoxOptions.Size = new System.Drawing.Size(309, 116);
             this.groupBoxOptions.TabIndex = 0;
             this.groupBoxOptions.TabStop = false;
             this.groupBoxOptions.Text = "Options";
@@ -241,9 +243,9 @@
             // 
             this.groupBoxItems.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBoxItems.Controls.Add(this.richTextBox1);
-            this.groupBoxItems.Location = new System.Drawing.Point(12, 146);
+            this.groupBoxItems.Location = new System.Drawing.Point(12, 174);
             this.groupBoxItems.Name = "groupBoxItems";
-            this.groupBoxItems.Size = new System.Drawing.Size(309, 275);
+            this.groupBoxItems.Size = new System.Drawing.Size(309, 247);
             this.groupBoxItems.TabIndex = 1;
             this.groupBoxItems.TabStop = false;
             this.groupBoxItems.Text = "Items";
@@ -255,7 +257,7 @@
             this.richTextBox1.Location = new System.Drawing.Point(3, 16);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(303, 256);
+            this.richTextBox1.Size = new System.Drawing.Size(303, 228);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             this.richTextBox1.WordWrap = false;
@@ -272,7 +274,7 @@
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(12, 117);
+            this.buttonStart.Location = new System.Drawing.Point(12, 145);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(75, 23);
             this.buttonStart.TabIndex = 2;
@@ -283,7 +285,7 @@
             // buttonStop
             // 
             this.buttonStop.Enabled = false;
-            this.buttonStop.Location = new System.Drawing.Point(93, 117);
+            this.buttonStop.Location = new System.Drawing.Point(93, 145);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStop.TabIndex = 4;
@@ -306,6 +308,16 @@
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+            // 
+            // checkBoxIgnoreHeroic
+            // 
+            this.checkBoxIgnoreHeroic.AutoSize = true;
+            this.checkBoxIgnoreHeroic.Location = new System.Drawing.Point(8, 94);
+            this.checkBoxIgnoreHeroic.Name = "checkBoxIgnoreHeroic";
+            this.checkBoxIgnoreHeroic.Size = new System.Drawing.Size(165, 17);
+            this.checkBoxIgnoreHeroic.TabIndex = 10;
+            this.checkBoxIgnoreHeroic.Text = "Ignore Heroic/Frozen/Cursed";
+            this.checkBoxIgnoreHeroic.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -359,6 +371,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.CheckBox checkBoxUncommons;
+        private System.Windows.Forms.CheckBox checkBoxIgnoreHeroic;
     }
 }
 

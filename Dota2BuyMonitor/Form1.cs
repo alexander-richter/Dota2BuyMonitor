@@ -185,8 +185,20 @@ namespace Dota2BuyMonitor
                 //break up single itemstrings to array
                 string[] itemdata = itemstring.Split('|');
 
-                //no common & uncommon
-                if (!itemdata[2].Contains(allow_uncommons))
+                //option no heroics, cursed or frozen items
+                string[] heroics = {};
+                bool IgnoreHeroics = true;
+                if (checkBoxIgnoreHeroic.Checked == true)
+                {
+                    heroics = new string[] { "Cursed ", "Heroic ", "Frozen " };
+                    if (heroics.Any(itemdata[0].Contains))
+                    {
+                        IgnoreHeroics = false;
+                    }
+                }
+
+                //no common & uncommon //Option no Heroic / Cursed ...
+                if (!itemdata[2].Contains(allow_uncommons) && IgnoreHeroics)
                 {
                     document = web.Load("http://www.dota2wh.com" + itemdata[1]);
                     try
